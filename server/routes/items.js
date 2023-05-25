@@ -27,21 +27,8 @@ router.get('/:id', async (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 //creating
-router.post('/', async (req, res, next) => {
+router.post('/:id/new-item', async (req, res, next) => {
     const { name, description, price, category, image } = req.body;
   
     try { // creating a new item using the Item model
@@ -64,7 +51,7 @@ router.post('/', async (req, res, next) => {
   });
   
   //updating
-  router.put('/', async (req, res) => {
+  router.put('/:id/edit-item', async (req, res) => {
     const { itemId } = req.params;
     const { name, description, price, category, image } = req.body;
   
@@ -95,7 +82,7 @@ router.post('/', async (req, res, next) => {
   });
 
 //delete
-router.delete('/', async (req, res) => {
+router.delete('/:id/delete', async (req, res) => {
     const { itemId } = req.params;
   
     try {
