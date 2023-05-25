@@ -1,9 +1,9 @@
 module.exports = {
-  sauces: [
-    {"name" : "Sriracha", "image" : "https://64.media.tumblr.com/12cd128183713bf928bda87a24f22487/tumblr_ne6jee85PM1tha1vgo1_250.gif"},
-    {"name" : "Franks", "image": "https://cdn.streamelements.com/uploads/1887a0da-3642-4795-b5f5-774d5b377e52.gif"},
-    {"name" : "Tobasco", "image": "https://64.media.tumblr.com/1564fcf74adc3fe6542c34b6a1f05de1/tumblr_na9lew0bNS1tha1vgo1_r1_250.gif"}
-  ],
+//   sauces: [
+//     {"name" : "Sriracha", "image" : "https://64.media.tumblr.com/12cd128183713bf928bda87a24f22487/tumblr_ne6jee85PM1tha1vgo1_250.gif"},
+//     {"name" : "Franks", "image": "https://cdn.streamelements.com/uploads/1887a0da-3642-4795-b5f5-774d5b377e52.gif"},
+//     {"name" : "Tobasco", "image": "https://64.media.tumblr.com/1564fcf74adc3fe6542c34b6a1f05de1/tumblr_na9lew0bNS1tha1vgo1_r1_250.gif"}
+//   ],
   items: [
     {
        "title":"Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -14,7 +14,7 @@ module.exports = {
     },
     {
        "title":"Mens Casual Premium Slim Fit T-Shirts ",
-       "price":22.3,
+       "price":22,
        "description":"Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
        "category":"men's clothing",
        "image":"https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
