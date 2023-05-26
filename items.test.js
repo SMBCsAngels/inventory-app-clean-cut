@@ -1,89 +1,74 @@
-
-const assert = require('assert');
+import {expect, describe, test} from '@jest/globals';
 const request = require("supertest");
-const {describe, expect, test} = require("@jest/globals");
+const router = require('./items');
 
-//IMPORTS
- // replace with express app later
-const app = require('./app');
+describe('Item API', () => {
+    let testItemId;
 
-describe('Inventory Management API', () => {
-    
-})  
+    describe('GET /items/:id', () => {
+        test('all items', async () => {
+            const response = await require(router).get('/items');
+            expect(response.status).toBe(200);
+            expect(response.body).toBeDefined();
+        
+        });
+    });
 
 // GET 
 
-test('create an items', (done) => {
-    const newItem = {
-        name: 'New Item',
-        description: 'This is a new item.',
-        price: 9.99,
-        category: 'Miscellaneous',
-        image: 'new-item.jpg',
-    };
+    describe('POST /items/:id/new-item', () => {
+        test('should create an item', async () => {
+            const newItem = {
+                name: 'New Item',
+                description: 'This is a new item.',
+                price: 9.99,
+                category: 'Miscellaneous',
+                image: 'new-item.jpg',
+            };
+    
+        const response = await request(router).post('/items').send(newItem);
+        expect(response.status).toBe(201);
+        expect(response.body).toBeDefined();
+        expect(response.body.id).toBeDefined();
 
-    request(app) //REPLACE LATER
-        .post('/items')
-        .send(newItem)
-        .expect(201)
-        .end((err, res) => {
-            if (err) return done(err);
-
-            assert.equal(res.body.name, newItem.name);
-            assert.equal(res.body.description, newItem.description);
-            assert.equal(res.body.price, newItem.price);
-            assert.equal(res.body.category, newItem.category);
-            assert.equal(res.body.image, newItem.image);
-            assert.equal(typeof res.body.id, 'number');
-            assert.equal(typeof res.body.slug, 'string');
-
-            createdItemId = res.body.id;
-            createdItemSlug = res.body.slug;
-            done();
-        })
-
-})
+        testItemId = response.body.id;
+        });
+    });
 
 // PUT (update)
 
-test('should update an existing item', (done) => {
-    const updatedItem = {
-      name: 'Updated Item',
-      description: 'This item has been updated.',
-      price: 19.99,
-      category: 'Miscellaneous',
-      image: 'updated-item.jpg',
-    };
+    describe('PUT /items/:id/edit-item', () => {
+        test('should update an item', async () => {
+            const updatedItem = {
+                name: 'Updated Item',
+                description: 'This is an updated item.',
+                price: 9.99,
+                category: 'Miscellaneous',
+                image: 'update.jpg',
+            };
 
-    request(app) //replace later with express app instance
-        .put(`/items/${createdItemSlug}`)
-        .send(updatedItem)
-        .expect(200)
-        .end((err, res) => {
-            if (err) return done(err);
+        const response = await request(router).put(`/items/${testItemId}`).send(updatedItem);
+        expect(response.status).toBe(200);
+        expect(response.body).toBeDefined();
+        expect(response.body.id).toBe(testItemId);
+        expect(response.body.name).toBe(updatedItem.name);
 
-            assert.equal(res.body.id, createdItemId);
-            assert.equal(res.body.name, updatedItem.name);
-            assert.equal(res.body.description, updatedItem.description);
-            assert.equal(res.body.price, updatedItem.price);
-            assert.equal(res.body.category, updatedItem.category);
-            assert.equal(res.body.image, updatedItem.image);
-            done();
         });
-});
+    });
+
 
 //DELETE
 
-test('should delete an existing item', (done) => {
-    request(app) // replace with express 
-      .delete(`/items/${createdItemSlug}`)
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
+    describe('DELETE /items/:id/delete', () => {
+        test('should update an item', async () => {
+            const response = await request(router).delete(`/items/${testItemId}`);
+            expect(response.status).toBe(200);
+            expect(response.body).toBeNull();
+            expect(response.body.message).toBe('item deleted');
+         });
+    });
+});
 
-        assert.equal(res.body.message, 'Item deleted');
-        done();
-      });
-  });
+
 
 
